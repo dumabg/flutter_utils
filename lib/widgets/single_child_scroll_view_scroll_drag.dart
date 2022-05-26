@@ -11,7 +11,7 @@ class SingleChildScrollViewScrollDrag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scrollbar(
-      isAlwaysShown: false,
+      thumbVisibility: false,
       child: ScrollConfiguration(
           behavior: ScrollConfigurationDragMouse(),
           child: SingleChildScrollView(

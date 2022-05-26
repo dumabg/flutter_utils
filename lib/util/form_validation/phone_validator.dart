@@ -4,7 +4,7 @@ import 'package:dart_utils/extensions/string/remove_chars.dart';
 class PhoneValidator extends TextFieldValidator {
   String _countryCode = "";
   set countryCode(String value) {
-    _countryCode = "+" + value;
+    _countryCode = "+$value";
   }
 
   final RegExp _regExp;
