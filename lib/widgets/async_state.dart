@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_utils/mocking/mock_factory.dart';
-import 'package:flutter_utils/services/toast_service.dart';
 import 'loading_indicator.dart';
 
 /// Define a [StatefulWidget] [State] that will use an object with the controller role.
@@ -46,6 +45,8 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
   /// Build method when the [State] are initialized correctly with [asyncInitState]
   Widget buildWhenDone(BuildContext context);
 
+  static Function(Object error)? onError;
+
   @override
   Widget build(BuildContext context) => _futureDone
       ? buildWhenDone(context)
@@ -56,7 +57,7 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
               case ConnectionState.done:
                 if (snapshot.hasError) {
                   _futureDone = false;
-                  ToastService.showError(snapshot.error);
+                  onError?.call(snapshot.error!);
                   return buildWhenError(context);
                 } else {
                   _futureDone = true;
