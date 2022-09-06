@@ -13,7 +13,7 @@ class CircleButton extends ElevatedButton {
             style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
                 elevation: 2.0,
-                primary: color,
+                backgroundColor: color,
                 shape: CircleBorder(side: borderSide)),
             child: child);
 }
