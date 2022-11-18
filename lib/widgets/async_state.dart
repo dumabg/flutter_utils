@@ -20,7 +20,7 @@ abstract class StateWithController<T extends StatefulWidget, U>
   /// Creates the controller. If a mocked controller is registered in [MockFactory],
   /// it use the mocked controller else calls [createController] for creating it.
   void initState() {
-    _controller = MockFactory.instance<U>() ?? createController();
+    _controller = mock?.of<U>() ?? createController();
     super.initState();
   }
 }
@@ -119,7 +119,7 @@ abstract class AsyncStateWithController<T extends StatefulWidget,
   @override
   @mustCallSuper
   Future<void> asyncInitState() async {
-    _controller = MockFactory.instance<U>() ?? createController();
+    _controller = mock?.of<U>() ?? createController();
     await controller.asyncInitState();
   }
 }
