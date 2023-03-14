@@ -31,7 +31,8 @@ class DropdownButtonFormField extends FormField<int> {
                 Text(
                   state.errorText!,
                   style: TextStyle(
-                      color: Theme.of(state.context).errorColor, fontSize: 12),
+                      color: Theme.of(state.context).colorScheme.error,
+                      fontSize: 12),
                 ),
             ],
           ),

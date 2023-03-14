@@ -34,7 +34,7 @@ class SwitchFormField extends FormField<bool> {
                     Text(
                       state.errorText!,
                       style: TextStyle(
-                          color: Theme.of(state.context).errorColor,
+                          color: Theme.of(state.context).colorScheme.error,
                           fontSize: 12),
                     ),
                 ],

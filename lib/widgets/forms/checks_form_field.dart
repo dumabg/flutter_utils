@@ -8,13 +8,13 @@ class ChecksFormField extends FormField<List<bool>> {
     FormFieldSetter<List<bool>>? onSaved,
     FormFieldValidator<List<bool>>? validator,
     required List<String> titles,
-    List<bool>? initialvalues,
+    List<bool>? initialValues,
   }) : super(
             key: key,
             onSaved: onSaved,
             validator: validator,
             initialValue:
-                initialvalues ?? List<bool>.filled(titles.length, false),
+                initialValues ?? List<bool>.filled(titles.length, false),
             builder: (FormFieldState<List<bool>> state) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class ChecksFormField extends FormField<List<bool>> {
                         child: Text(
                           state.errorText!,
                           style: TextStyle(
-                              color: Theme.of(state.context).errorColor,
+                              color: Theme.of(state.context).colorScheme.error,
                               fontSize: 12),
                         ),
                       ),
