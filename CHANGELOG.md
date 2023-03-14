@@ -1,3 +1,6 @@
+## 3.1.1
+- Renamed `FormValidation` to `GlobalKeyFormStateValidation` and moved to extensions directory.
+
 ## 3.1.0
 - Added `FormValidation` extension for `GlobalKey<FormState>` with the method `validateAndShowInvalid()`.
 
