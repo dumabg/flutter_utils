@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_utils/mocking/mock_factory.dart';
 import 'loading_indicator.dart';
@@ -47,11 +49,20 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
 
   static Function(Object error)? onError;
 
+  Completer<void>? _asyncInitStateCompleter;
+
+  @override
+  void initState() {
+    _asyncInitStateCompleter = Completer<void>();
+    asyncInitState().then((_) => _asyncInitStateCompleter!.complete());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => _futureDone
       ? buildWhenDone(context)
       : FutureBuilder(
-          future: asyncInitState(),
+          future: _asyncInitStateCompleter?.future,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
