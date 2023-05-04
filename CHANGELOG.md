@@ -1,3 +1,6 @@
+## 3.1.2
+- AsyncState: asyncInitState is called inside initState and the Future is completed with a Completer.
+
 ## 3.1.1
 - Renamed `FormValidation` to `GlobalKeyFormStateValidation` and moved to extensions directory.
 
