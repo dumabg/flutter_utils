@@ -47,7 +47,7 @@ packages:
       path: "."
       ref: HEAD
       resolved-ref: "846618ced9fd9bc30feac022af74e6016ac149ca"
-      url: "https://gitlab+deploy-token-942487:2VU4CVF1xTRJyr5vypsf@gitlab.com/indulgeme/lib-dart-dart_utils"
+      url: "https://github.com/dumabg/dart_utils.git"
     source: git
     version: "1.2.0"
   fake_async:
