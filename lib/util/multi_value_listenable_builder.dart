@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class MultiValueListenableBuilder extends StatelessWidget {
-  final List<ValueNotifier> notifiers;
+  final List<ValueNotifier<dynamic>> notifiers;
   final Widget? child;
   final Widget Function(BuildContext, Widget?) builder;
   final ValueNotifier<bool> mustRebuildSignal;
@@ -10,7 +10,7 @@ class MultiValueListenableBuilder extends StatelessWidget {
       {Key? key, required this.notifiers, required this.builder, this.child})
       : mustRebuildSignal = ValueNotifier<bool>(true),
         super(key: key) {
-    for (ValueNotifier notifier in notifiers) {
+    for (ValueNotifier<dynamic> notifier in notifiers) {
       notifier.addListener(
           () => mustRebuildSignal.value = !mustRebuildSignal.value);
     }

@@ -12,9 +12,11 @@ include: package:flutter_lints/flutter.yaml
 # Begin MABG
 # https://dart.dev/guides/language/analysis-options
 analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  plugins:
+    - dart_code_metrics
 # End MABG
 
 linter:

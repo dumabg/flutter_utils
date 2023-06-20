@@ -1,3 +1,7 @@
+## 3.1.3
+
+- Upgrade to Dart 3
+
 ## 3.1.2
 - AsyncState: asyncInitState is called inside initState and the Future is completed with a Completer.
 

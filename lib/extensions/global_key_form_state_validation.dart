@@ -23,7 +23,7 @@ extension GlobalKeyFormStateValidation on GlobalKey<FormState> {
       if (!found) {
         var widget = element.widget;
         if (widget is FormField) {
-          FormFieldState state =
+          FormFieldState<dynamic> state =
               (element as StatefulElement).state as FormFieldState;
           if (state.hasError) {
             state.context
