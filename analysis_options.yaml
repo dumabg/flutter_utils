@@ -15,8 +15,6 @@ analyzer:
   language:
     strict-casts: true
     strict-raw-types: true
-  plugins:
-    - dart_code_metrics
 # End MABG
 
 linter:
