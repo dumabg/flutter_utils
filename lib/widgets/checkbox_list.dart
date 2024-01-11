@@ -7,11 +7,10 @@ class CheckboxList extends StatefulWidget {
   final bool checkOnLeft;
 
   CheckboxList(
-      {Key? key,
+      {super.key,
       required this.options,
       required this.checked,
-      this.checkOnLeft = true})
-      : super(key: key) {
+      this.checkOnLeft = true}) {
     assert(options.length == checked.length);
   }
 

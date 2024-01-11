@@ -3,15 +3,11 @@ import 'package:flutter_utils/extensions/time_of_day_to_string.dart';
 
 class TimeOfDayFormField extends FormField<TimeOfDay> {
   TimeOfDayFormField({
-    Key? key,
-    required TimeOfDay initialValue,
-    FormFieldSetter<TimeOfDay>? onSaved,
-    FormFieldValidator<TimeOfDay>? validator,
+    super.key,
+    required TimeOfDay super.initialValue,
+    super.onSaved,
+    super.validator,
   }) : super(
-          key: key,
-          initialValue: initialValue,
-          validator: validator,
-          onSaved: onSaved,
           builder: (FormFieldState<TimeOfDay> state) {
             return InkWell(
               onTap: () async {

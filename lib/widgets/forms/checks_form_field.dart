@@ -4,15 +4,12 @@ import '../checkbox_list.dart';
 
 class ChecksFormField extends FormField<List<bool>> {
   ChecksFormField({
-    Key? key,
-    FormFieldSetter<List<bool>>? onSaved,
-    FormFieldValidator<List<bool>>? validator,
+    super.key,
+    super.onSaved,
+    super.validator,
     required List<String> titles,
     List<bool>? initialValues,
   }) : super(
-            key: key,
-            onSaved: onSaved,
-            validator: validator,
             initialValue:
                 initialValues ?? List<bool>.filled(titles.length, false),
             builder: (FormFieldState<List<bool>> state) => Column(

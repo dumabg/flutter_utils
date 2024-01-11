@@ -26,7 +26,7 @@ class SampleMock implements Sample {
 }
 
 class SampleMockWithParams extends Sample {
-  SampleMockWithParams(String msg, int value) : super.$(msg, value);
+  SampleMockWithParams(super.msg, super.value) : super.$();
 
   @override
   String hello() => "Hello from mock: $msg - $value";

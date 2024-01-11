@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 
 class CircleButton extends ElevatedButton {
   CircleButton(
-      {Key? key,
-      Widget? child,
+      {super.key,
+      super.child,
       Color? color,
-      VoidCallback? onPressed,
+      super.onPressed,
       BorderSide borderSide = BorderSide.none})
       : super(
-            key: key,
-            onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
                 elevation: 2.0,
                 backgroundColor: color,
-                shape: CircleBorder(side: borderSide)),
-            child: child);
+                shape: CircleBorder(side: borderSide)));
 }

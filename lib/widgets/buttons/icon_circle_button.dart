@@ -3,18 +3,14 @@ import 'circle_button.dart';
 
 class IconCircleButton extends CircleButton {
   IconCircleButton(
-      {Key? key,
+      {super.key,
       required IconData iconData,
-      Color? color,
-      VoidCallback? onPressed,
+      super.color,
+      super.onPressed,
       Color iconColor = Colors.white,
       double? size,
-      BorderSide borderSide = BorderSide.none})
+      super.borderSide})
       : super(
-          key: key,
-          onPressed: onPressed,
-          color: color,
-          borderSide: borderSide,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Icon(

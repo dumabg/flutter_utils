@@ -3,16 +3,13 @@ import 'package:dart_utils/extensions/list_map_with_index.dart';
 
 class DropdownButtonFormField extends FormField<int> {
   DropdownButtonFormField(
-      {Key? key,
-      FormFieldSetter<int>? onSaved,
-      FormFieldValidator<int>? validator,
+      {super.key,
+      super.onSaved,
+      super.validator,
       int? index,
       Widget? icon,
       required List<String> values})
       : super(
-          key: key,
-          onSaved: onSaved,
-          validator: validator,
           initialValue: index,
           builder: (FormFieldState<int> state) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,

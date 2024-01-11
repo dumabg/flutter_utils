@@ -6,8 +6,7 @@ class Stars extends StatelessWidget {
   final double size;
 
   const Stars(
-      {Key? key, required this.value, required this.color, this.size = 30.0})
-      : super(key: key);
+      {super.key, required this.value, required this.color, this.size = 30.0});
 
   @override
   Widget build(BuildContext context) {

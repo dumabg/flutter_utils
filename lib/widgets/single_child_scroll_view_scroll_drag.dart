@@ -7,8 +7,7 @@ class SingleChildScrollViewScrollDrag extends StatelessWidget {
   final _controller = ScrollController();
 
   SingleChildScrollViewScrollDrag(
-      {Key? key, required this.child, this.scrollDirection = Axis.vertical})
-      : super(key: key);
+      {super.key, required this.child, this.scrollDirection = Axis.vertical});
 
   @override
   Widget build(BuildContext context) => Scrollbar(

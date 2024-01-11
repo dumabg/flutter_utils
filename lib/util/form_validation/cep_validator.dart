@@ -2,7 +2,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:dart_utils/extensions/string/remove_chars.dart';
 
 class CEPValidator extends TextFieldValidator {
-  CEPValidator(String errorText) : super(errorText);
+  CEPValidator(super.errorText);
 
   @override
   bool isValid(String? value) {

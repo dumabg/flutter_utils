@@ -9,9 +9,8 @@ class PhoneValidator extends TextFieldValidator {
 
   final RegExp _regExp;
 
-  PhoneValidator(String errorText)
-      : _regExp = RegExp(r"^\+(?:[0-9] ?){6,14}[0-9]$"),
-        super(errorText);
+  PhoneValidator(super.errorText)
+      : _regExp = RegExp(r"^\+(?:[0-9] ?){6,14}[0-9]$");
 
   //Required pattern for Pagar.me: ^\\+(?:[0-9] ?){6,14}[0-9]$/
   @override
