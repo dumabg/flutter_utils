@@ -110,27 +110,20 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
   }
 }
 
-/// Defines an async controller.
-abstract class AsyncController {
-  /// Initialization of the async controller.
-  Future<void> asyncInitState();
-}
-
 /// Define an [AsyncState] that will use an [AsyncController].
 /// The controller could be used by child objects via [controller] property.
 /// This controller could be mocked by [MockFactory].
 
-abstract class AsyncStateWithController<T extends StatefulWidget,
-    U extends AsyncController> extends AsyncState<T> {
+abstract class AsyncStateWithController<T extends StatefulWidget, U>
+    extends AsyncState<T> {
   U? _controller;
   U get controller => _controller!;
 
-  U createController();
+  Future<U> createController();
 
   @override
   @mustCallSuper
   Future<void> asyncInitState() async {
-    _controller = mock?.of<U>() ?? createController();
-    await controller.asyncInitState();
+    _controller = await (mock?.of<Future<U>>() ?? createController());
   }
 }
