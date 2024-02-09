@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_utils/extensions/time_of_day_to_string.dart';
 
 class TimeOfDayFormField extends FormField<TimeOfDay> {
+  final void Function(TimeOfDay)? onChanged;
+
   TimeOfDayFormField({
     super.key,
     required TimeOfDay super.initialValue,
+    this.onChanged,
     super.onSaved,
     super.validator,
   }) : super(
@@ -17,6 +20,7 @@ class TimeOfDayFormField extends FormField<TimeOfDay> {
                 );
                 if (picked != null) {
                   state.didChange(picked);
+                  onChanged?.call(picked);
                 }
               },
               child: Column(
