@@ -3,6 +3,7 @@
         "autovalidate",
         "Besalduch",
         "grey",
-        "LTRB"
+        "LTRB",
+        "unawaited"
     ]
 }

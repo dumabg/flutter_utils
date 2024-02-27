@@ -110,10 +110,9 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
   }
 }
 
-/// Define an [AsyncState] that will use an [AsyncController].
+/// Define an [AsyncState] that will create a future controller.
 /// The controller could be used by child objects via [controller] property.
 /// This controller could be mocked by [MockFactory].
-
 abstract class AsyncStateWithController<T extends StatefulWidget, U>
     extends AsyncState<T> {
   U? _controller;
@@ -126,4 +125,10 @@ abstract class AsyncStateWithController<T extends StatefulWidget, U>
   Future<void> asyncInitState() async {
     _controller = await (mock?.of<Future<U>>() ?? createController());
   }
+
+  /// Determine if the controller is created. CreateController method
+  /// returns a Future so it's possible than the controller isn't created
+  /// when calls another methods, like buildWhenLoading, buildWhenError,
+  /// dispose, ...
+  bool isControllerCreated() => _controller != null;
 }
