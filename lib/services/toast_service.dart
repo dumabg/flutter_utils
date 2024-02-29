@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:dart_utils/api/server_status_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class ToastService {
         Try it again later.
         ''';
     } else {
-      if (e is TimeoutException) {
+      if ((e is TimeoutException) || (e is SocketException)) {
         msg = "Can't connect with the server. Is Internet available?";
       } else {
         msg = "Unexpected error: ${e.toString()}";
@@ -45,10 +46,11 @@ class ToastService {
 
   static void _showError(String msg) {
     msg = msg.isEmpty ? "No message" : msg;
-    // Be sure that the snackbar is applyed after building stater.
+    // Be sure the snackbar is applied after build state.
     Timer(const Duration(seconds: 0), () {
       scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
-        content: Text(msg),
+        content: Text(msg,
+            style: const TextStyle(color: Colors.white, fontSize: 17)),
         backgroundColor: Colors.redAccent,
         padding: const EdgeInsets.all(40),
         behavior: SnackBarBehavior.floating,
@@ -57,7 +59,7 @@ class ToastService {
   }
 
   static void showInfo(String msg) {
-    // Be sure that the snackbar is applyed after building stater.
+    // Be sure the snackbar is applied after build state.
     Timer(const Duration(seconds: 0), () {
       scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
         content: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
