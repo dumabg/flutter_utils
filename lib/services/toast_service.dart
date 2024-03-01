@@ -7,6 +7,12 @@ import 'package:flutter/material.dart';
 class ToastService {
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
+  static String internalError = 'Unexpected internal error';
+  static String serverInternalError = 'Server returns an unexpected error';
+  static String serverInternalErrorTryAgain = 'Try it again later';
+  static String noInternetError =
+      'Can' 't access Internet. Is Internet available?';
+
   static void showError(dynamic e) {
     if (e is Exception) {
       _showException(e);
@@ -15,12 +21,12 @@ class ToastService {
         _showError(e);
       } else {
         if (e is Error) {
-          _showError("Unexpected internal error: ${e.toString()}");
+          _showError('$internalError: ${e.toString()}');
           if (kDebugMode) {
             print(e.stackTrace.toString);
           }
         } else {
-          _showError(e.toString());
+          _showError(Error.safeToString(e));
         }
       }
     }
@@ -30,32 +36,32 @@ class ToastService {
   static void _showException(Exception e) {
     String msg;
     if (e is ServerStatusException) {
-      msg =
-          '''Server returns an unexpected error ${e.status}: ${e.reasonPhrase ?? ''}.
-        Try it again later.
+      msg = '''$serverInternalError ${e.status}: ${e.reasonPhrase ?? ''}.
+        $serverInternalErrorTryAgain.
         ''';
     } else {
       if ((e is TimeoutException) || (e is SocketException)) {
-        msg = "Can't connect with the server. Is Internet available?";
+        msg = noInternetError;
       } else {
-        msg = "Unexpected error: ${e.toString()}";
+        msg = '$internalError: ${e.toString()}';
       }
     }
     _showError(msg);
   }
 
   static void _showError(String msg) {
-    msg = msg.isEmpty ? "No message" : msg;
-    // Be sure the snackbar is applied after build state.
-    Timer(const Duration(seconds: 0), () {
-      scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
-        content: Text(msg,
-            style: const TextStyle(color: Colors.white, fontSize: 17)),
-        backgroundColor: Colors.redAccent,
-        padding: const EdgeInsets.all(40),
-        behavior: SnackBarBehavior.floating,
-      ));
-    });
+    if (msg.isNotEmpty) {
+      // Be sure the snackbar is applied after build state.
+      Timer(const Duration(seconds: 0), () {
+        scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
+          content: Text(msg,
+              style: const TextStyle(color: Colors.white, fontSize: 17)),
+          backgroundColor: Colors.redAccent,
+          padding: const EdgeInsets.all(40),
+          behavior: SnackBarBehavior.floating,
+        ));
+      });
+    }
   }
 
   static void showInfo(String msg) {
