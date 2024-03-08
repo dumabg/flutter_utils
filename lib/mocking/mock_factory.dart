@@ -1,3 +1,5 @@
+import 'package:flutter_utils/widgets/async_state.dart';
+
 /// When a class would be needed to mock, it can create a factory that uses
 /// [mock] for return a mocked instance (if is mocked) or create a normal object.
 ///
@@ -58,12 +60,28 @@ MockFactory? mock;
 ///
 /// See global variable [mock]
 class MockFactory {
-  final Map<Type, dynamic Function(Map<String, dynamic>? params)?> _callbacks =
+  final Map<Type, dynamic Function(Map<String, dynamic>? params)> _callbacks =
       {};
+  final Map<Type, _AsyncFactoryMock<dynamic>> _callbacksAsyncFactory = {};
 
   /// Returns a new instance of a mocked object of type T if it is registered, else null.
   T? of<T>([Map<String, dynamic>? params]) {
-    dynamic value = _callbacks[T]?.call(params);
+    dynamic value;
+    // T is AsyncFactory always return false, because "is" operator will check
+    // if left operand is an instance of right operand. T is an instance of Type,
+    // not an AsyncFactory.
+    //
+    // T == AsyncFactory always return false, because == checks for identity
+    // and will not support subtypes.
+    //
+    // To support type inheritance you can use a trick like this: <T>[] is List<AsyncFactory>
+    if (<T>[] is List<AsyncFactory>) {
+      final _AsyncFactoryMock<dynamic>? mock = _callbacksAsyncFactory[T];
+      mock?.params = params;
+      value = mock;
+    } else {
+      value = _callbacks[T]?.call(params);
+    }
     return value == null ? null : value as T;
   }
 
@@ -72,7 +90,30 @@ class MockFactory {
   /// mock!.register<ExperienceDetailController>(
   ///    (params) => ExperienceDetailControllerMock());
   /// ```
-  void register<T>(T Function(Map<String, dynamic>? params)? f) {
+  void register<T>(T Function(Map<String, dynamic>? params) f) {
     _callbacks[T] = f;
   }
+
+  /// Register a function for creating a mocked object of type T,
+  /// created from AsyncFactory.
+  /// The mock is created when request an AsyncFactory<T> type.
+  ///
+  /// ```dart
+  /// mock!.registerAsyncFactoryFor<ExperienceDetailController>(
+  ///    (params) => ExperienceDetailControllerMock());
+  /// ```
+  void registerAsyncFactoryFor<T>(T Function(Map<String, dynamic>? params) f) {
+    _callbacksAsyncFactory[AsyncFactory<T>] = _AsyncFactoryMock<T>(f);
+  }
+}
+
+/// The AsyncFactoryMock for a type
+class _AsyncFactoryMock<T> extends AsyncFactory<T> {
+  Map<String, dynamic>? params;
+  final T Function(Map<String, dynamic>? params) f;
+
+  _AsyncFactoryMock(this.f);
+
+  @override
+  Future<T> instance() async => f.call(params);
 }
