@@ -1,5 +1,5 @@
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter/widgets.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class MatchValidator extends FieldValidator<String?> {
   final TextEditingController editingController;

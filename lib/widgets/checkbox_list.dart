@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dart_utils/extensions/list_map_with_index.dart';
+import 'package:flutter/material.dart';
 
 class CheckboxList extends StatefulWidget {
   final List<String> options;
@@ -7,9 +7,9 @@ class CheckboxList extends StatefulWidget {
   final bool checkOnLeft;
 
   CheckboxList(
-      {super.key,
-      required this.options,
+      {required this.options,
       required this.checked,
+      super.key,
       this.checkOnLeft = true}) {
     assert(options.length == checked.length);
   }

@@ -1,7 +1,8 @@
 import 'package:flutter_utils/widgets/async_state.dart';
 
 /// When a class would be needed to mock, it can create a factory that uses
-/// [mock] for return a mocked instance (if is mocked) or create a normal object.
+/// [mock] for return a mocked instance (if is mocked) or create a normal
+/// object.
 ///
 /// Create a factory and a named constructor. For exemple:
 ///
@@ -42,9 +43,12 @@ import 'package:flutter_utils/widgets/async_state.dart';
 ///   FirebaseImage.$(
 ///       this.location, this.scale, this.cacheVersion, this.emptyImage);
 /// ```
-/// Put your named constructor protected if you want to extends the class for creating the mock class.
+/// Put your named constructor protected if you want to extends the class for
+/// creating the mock class.
 ///
-/// When create your mock, you can access the parameters and create the object correctly. For exemple:
+/// When create your mock, you can access the parameters and create the object
+/// correctly. For exemple:
+///
 /// ```dart
 /// class FirebaseImageMock extends FirebaseImage implements Mock {
 ///  FirebaseImageMock(String location) : super.$(location, 1.0, 0, null);
@@ -64,17 +68,19 @@ class MockFactory {
       {};
   final Map<Type, _AsyncFactoryMock<dynamic>> _callbacksAsyncFactory = {};
 
-  /// Returns a new instance of a mocked object of type T if it is registered, else null.
+  /// Returns a new instance of a mocked object of type T if it is registered,
+  /// else null.
   T? of<T>([Map<String, dynamic>? params]) {
     dynamic value;
     // T is AsyncFactory always return false, because "is" operator will check
-    // if left operand is an instance of right operand. T is an instance of Type,
-    // not an AsyncFactory.
+    // if left operand is an instance of right operand. T is an instance of
+    // Type, not an AsyncFactory.
     //
     // T == AsyncFactory always return false, because == checks for identity
     // and will not support subtypes.
     //
-    // To support type inheritance you can use a trick like this: <T>[] is List<AsyncFactory>
+    // To support type inheritance you can use a trick like this: <T>[] is
+    // List<AsyncFactory>
     if (<T>[] is List<AsyncFactory>) {
       final _AsyncFactoryMock<dynamic>? mock = _callbacksAsyncFactory[T];
       mock?.params = params;

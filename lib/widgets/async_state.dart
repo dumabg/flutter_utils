@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_utils/mocking/mock_factory.dart';
 import 'loading_indicator.dart';
 
-/// Define a [StatefulWidget] [State] that will use an object with the controller role.
+/// Define a [StatefulWidget] [State] that will use an object with the
+/// controller role.
 /// The controller could be used by child objects via [controller] property.
 /// This controller could be mocked by [MockFactory].
 
@@ -19,31 +20,34 @@ abstract class StateWithController<T extends StatefulWidget, U>
   @override
   @mustCallSuper
 
-  /// Creates the controller. If a mocked controller is registered in [MockFactory],
-  /// it use the mocked controller else calls [createController] for creating it.
+  /// Creates the controller. If a mocked controller is registered in
+  /// [MockFactory], it use the mocked controller else calls [createController]
+  /// for creating it.
   void initState() {
     _controller = mock?.of<U>() ?? createController();
     super.initState();
   }
 }
 
-/// Define the [StatefulWidget] [State] like async. Build phase is done with a FutureBuilder
-/// than calls the method asyncInitState for launch all Futures needs for this State.
-/// In this phase the build is doing in the buildWhenLoading method. By default,
-/// it shows a LoadingIndicator.
+/// Define the [StatefulWidget] [State] like async. Build phase is done with a
+/// FutureBuilder than calls the method asyncInitState for launch all Futures
+/// needs for this State. In this phase the build is doing in the
+/// buildWhenLoading method. By default, it shows a LoadingIndicator.
 ///
 /// When asyncInitState is done, it examines the Future result. If all is ok,
 /// the buildWhenDone is called.
 ///
 /// If an error occurs, buildWhenError method is called.
-/// By default, buildWhenError shows in the middle a red replay icon, that can touch to retry.
+/// By default, buildWhenError shows in the middle a red replay icon, that can
+/// touch to retry.
 abstract class AsyncState<T extends StatefulWidget> extends State<T> {
   bool _futureDone = false;
 
   /// Allows initialize the [State] with async calls.
   Future<void> asyncInitState();
 
-  /// Build method when the [State] are initialized correctly with [asyncInitState]
+  /// Build method when the [State] are initialized correctly with
+  /// [asyncInitState]
   Widget buildWhenDone(BuildContext context);
 
   static void Function(Object error)? onError;
@@ -203,8 +207,8 @@ abstract class AsyncFactory<T> {
 /// Define an [AsyncState] that depends on async controller.
 /// An [AsyncFactory] of the controller must be returned. It's used to create
 /// the async controller.
-/// If the widget is disposed before the controller is created, [AsyncFactory.cancel]
-/// is called.
+/// If the widget is disposed before the controller is created,
+/// [AsyncFactory.cancel] is called.
 /// When the controller is created, could be used via [controller] property.
 /// This controller could be mocked by [MockFactory].
 abstract class AsyncStateWithController<T extends StatefulWidget, U>

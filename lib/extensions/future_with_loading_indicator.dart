@@ -6,7 +6,7 @@ import 'package:flutter_utils/widgets/loading_indicator.dart';
 
 extension FutureLoadingIndicator<T> on Future<T> {
   Future<T> withLoadingIndicator() {
-    BuildContext context = NavigatorOf.navigatorKey.currentState!.context;
+    final BuildContext context = NavigatorOf.navigatorKey.currentState!.context;
     showDialog<void>(
       context: context,
       builder: (context) => const LoadingIndicator(),

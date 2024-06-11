@@ -2,7 +2,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 class BoolValidator extends FieldValidator<bool?> {
   final bool state;
-  BoolValidator({this.state = true, required String errorText})
+  BoolValidator({required String errorText, this.state = true})
       : super(errorText);
 
   @override

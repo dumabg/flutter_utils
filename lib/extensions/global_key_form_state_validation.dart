@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 
 extension GlobalKeyFormStateValidation on GlobalKey<FormState> {
   /// Validates a Form and returns a boolean value indicating whether the form
-  /// is valid. It checks all the children FormFields to determine which is invalid.
-  /// If found it, shows on the screen.
+  /// is valid. It checks all the children FormFields to determine which is
+  /// invalid. If found it, shows on the screen.
   bool validateAndShowInvalid() {
-    bool allValid = currentState?.validate() ?? true;
+    final bool allValid = currentState?.validate() ?? true;
     if (!allValid) {
       bool found = false;
       currentContext?.visitChildElements((Element element) {
@@ -21,9 +21,9 @@ extension GlobalKeyFormStateValidation on GlobalKey<FormState> {
     bool found = false;
     element.visitChildElements((element) {
       if (!found) {
-        var widget = element.widget;
+        final widget = element.widget;
         if (widget is FormField) {
-          FormFieldState<dynamic> state =
+          final FormFieldState<dynamic> state =
               (element as StatefulElement).state as FormFieldState;
           if (state.hasError) {
             state.context

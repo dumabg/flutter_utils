@@ -4,10 +4,10 @@ import '../checkbox_list.dart';
 
 class ChecksFormField extends FormField<List<bool>> {
   ChecksFormField({
+    required List<String> titles,
     super.key,
     super.onSaved,
     super.validator,
-    required List<String> titles,
     List<bool>? initialValues,
   }) : super(
             initialValue:
@@ -22,7 +22,7 @@ class ChecksFormField extends FormField<List<bool>> {
                     ),
                     if (state.hasError)
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(23.0, 10.0, 0, 10.0),
+                        padding: const EdgeInsets.fromLTRB(23, 10, 0, 10),
                         child: Text(
                           state.errorText!,
                           style: TextStyle(

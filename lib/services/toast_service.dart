@@ -13,6 +13,7 @@ class ToastService {
   static String noInternetError =
       'Can' 't access Internet. Is Internet available?';
 
+  // ignore: avoid_annotating_with_dynamic
   static void showError(dynamic e) {
     if (e is Exception) {
       _showException(e);
@@ -21,7 +22,7 @@ class ToastService {
         _showError(e);
       } else {
         if (e is Error) {
-          _showError('$internalError: ${e.toString()}');
+          _showError('$internalError: $e');
           if (kDebugMode) {
             print(e.stackTrace.toString);
           }
@@ -36,14 +37,15 @@ class ToastService {
   static void _showException(Exception e) {
     String msg;
     if (e is ServerStatusException) {
-      msg = '''$serverInternalError ${e.status}: ${e.reasonPhrase ?? ''}.
+      msg = '''
+$serverInternalError ${e.status}: ${e.reasonPhrase ?? ''}.
         $serverInternalErrorTryAgain.
         ''';
     } else {
       if ((e is TimeoutException) || (e is SocketException)) {
         msg = noInternetError;
       } else {
-        msg = '$internalError: ${e.toString()}';
+        msg = '$internalError: $e';
       }
     }
     _showError(msg);
@@ -52,7 +54,7 @@ class ToastService {
   static void _showError(String msg) {
     if (msg.isNotEmpty) {
       // Be sure the snackbar is applied after build state.
-      Timer(const Duration(seconds: 0), () {
+      Timer(Duration.zero, () {
         scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
           content: Text(msg,
               style: const TextStyle(color: Colors.white, fontSize: 17)),
@@ -66,15 +68,15 @@ class ToastService {
 
   static void showInfo(String msg) {
     // Be sure the snackbar is applied after build state.
-    Timer(const Duration(seconds: 0), () {
+    Timer(Duration.zero, () {
       scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
-        content: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        content: Row(children: [
           const Icon(
             Icons.info_outline,
             color: Colors.white,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 10),
             child: Text(msg),
           )
         ]),

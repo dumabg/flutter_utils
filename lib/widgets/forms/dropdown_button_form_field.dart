@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:dart_utils/extensions/list_map_with_index.dart';
+import 'package:flutter/material.dart';
 
 class DropdownButtonFormField extends FormField<int> {
   DropdownButtonFormField(
-      {super.key,
+      {required List<String> values,
+      super.key,
       super.onSaved,
       super.validator,
       int? index,
-      Widget? icon,
-      required List<String> values})
+      Widget? icon})
       : super(
           initialValue: index,
           builder: (FormFieldState<int> state) => Column(

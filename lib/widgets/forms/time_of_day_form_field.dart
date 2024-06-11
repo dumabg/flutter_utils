@@ -5,8 +5,8 @@ class TimeOfDayFormField extends FormField<TimeOfDay> {
   final void Function(TimeOfDay)? onChanged;
 
   TimeOfDayFormField({
-    super.key,
     required TimeOfDay super.initialValue,
+    super.key,
     this.onChanged,
     super.onSaved,
     super.validator,
@@ -30,7 +30,7 @@ class TimeOfDayFormField extends FormField<TimeOfDay> {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 16.0),
+                            horizontal: 8, vertical: 16),
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -48,7 +48,7 @@ class TimeOfDayFormField extends FormField<TimeOfDay> {
                   ),
                   if (state.hasError)
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 8),
                       child: Text(
                         state.errorText!,
                         style: TextStyle(

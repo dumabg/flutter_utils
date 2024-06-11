@@ -7,8 +7,7 @@ class CheckboxFormField extends FormField<bool> {
       super.onSaved,
       super.validator,
       EdgeInsetsGeometry contentPadding = EdgeInsets.zero,
-      bool super.initialValue = false,
-      bool autovalidate = false})
+      bool super.initialValue = false})
       : super(builder: (FormFieldState<bool> state) {
           return CheckboxListTile(
             title: title,
@@ -18,7 +17,7 @@ class CheckboxFormField extends FormField<bool> {
             subtitle: state.hasError
                 ? Builder(
                     builder: (BuildContext context) => Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
+                      padding: const EdgeInsets.only(top: 4),
                       child: Text(
                         state.errorText!,
                         style: TextStyle(

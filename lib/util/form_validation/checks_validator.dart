@@ -8,7 +8,7 @@ class ChecksValidator extends FieldValidator<List<bool>?> {
     if (value == null) {
       return false;
     }
-    for (bool checked in value) {
+    for (final bool checked in value) {
       if (checked) {
         return true;
       }

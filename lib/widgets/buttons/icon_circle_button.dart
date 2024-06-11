@@ -3,8 +3,8 @@ import 'circle_button.dart';
 
 class IconCircleButton extends CircleButton {
   IconCircleButton(
-      {super.key,
-      required IconData iconData,
+      {required IconData iconData,
+      super.key,
       super.color,
       super.onPressed,
       Color iconColor = Colors.white,
@@ -12,7 +12,7 @@ class IconCircleButton extends CircleButton {
       super.borderSide})
       : super(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10),
             child: Icon(
               iconData,
               color: iconColor,

@@ -7,9 +7,9 @@ class MultiValueListenableBuilder extends StatelessWidget {
   final ValueNotifier<bool> mustRebuildSignal;
 
   MultiValueListenableBuilder(
-      {super.key, required this.notifiers, required this.builder, this.child})
+      {required this.notifiers, required this.builder, super.key, this.child})
       : mustRebuildSignal = ValueNotifier<bool>(true) {
-    for (ValueNotifier<dynamic> notifier in notifiers) {
+    for (final ValueNotifier<dynamic> notifier in notifiers) {
       notifier.addListener(
           () => mustRebuildSignal.value = !mustRebuildSignal.value);
     }
