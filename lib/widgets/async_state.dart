@@ -75,6 +75,7 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
+                _asyncInitStateCompleter = null;
                 if (snapshot.hasError) {
                   _futureDone = false;
                   onError?.call(snapshot.error!);
@@ -90,6 +91,15 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
 
   /// Build method when are waiting for the end of [asyncInitState].
   Widget buildWhenLoading(BuildContext context) => const LoadingIndicator();
+
+  /// Retry asyncInitState only if the previous call to asyncInitState is
+  /// completed. This method is called after pressing retry button on default
+  /// [buildWhenError].
+  void retryAsyncInitState() {
+    if (_asyncInitStateCompleter == null) {
+      setState(_asyncInitState);
+    }
+  }
 
   /// Build method when [asyncInitState] ends with and error. It shows in
   /// the middle a red replay icon, that can touch to retry.
@@ -114,7 +124,7 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
                     ),
                   )
                 ]),
-            onPressed: () => {setState(_asyncInitState)}),
+            onPressed: retryAsyncInitState),
       ),
     );
   }
