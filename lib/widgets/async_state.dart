@@ -50,7 +50,7 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
   /// [asyncInitState]
   Widget buildWhenDone(BuildContext context);
 
-  static void Function(Object error)? onError;
+  static void Function(Object error, StackTrace? stack)? onError;
 
   Completer<void>? _asyncInitStateCompleter;
 
@@ -78,7 +78,7 @@ abstract class AsyncState<T extends StatefulWidget> extends State<T> {
                 _asyncInitStateCompleter = null;
                 if (snapshot.hasError) {
                   _futureDone = false;
-                  onError?.call(snapshot.error!);
+                  onError?.call(snapshot.error!, snapshot.stackTrace);
                   return buildWhenError(context);
                 } else {
                   _futureDone = true;
@@ -157,7 +157,8 @@ class _CancelException {}
 /// neither the line orders.sort inside instance.
 ///
 /// ```dart
-/// class OrdersOpenControllerFactory extends AsyncFactory<OrdersOpenController> {
+/// class OrdersOpenControllerFactory extends AsyncFactory<OrdersOpenController>
+/// {
 /// @override
 ///  Future<OrdersOpenController> instance() async {
 ///    final List<Order> orders =
