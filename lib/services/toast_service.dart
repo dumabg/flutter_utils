@@ -4,6 +4,10 @@ import 'package:dart_utils/api/server_status_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// Called when an exception is thrown. Return true if the Exception is
+// considered a "No internet" error.
+typedef NoInternetAnalyzerFunction = bool Function(Exception);
+
 class ToastService {
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -12,6 +16,12 @@ class ToastService {
   static String serverInternalErrorTryAgain = 'Try it again later';
   static String noInternetError =
       'Can' 't access Internet. Is Internet available?';
+
+  static List<NoInternetAnalyzerFunction> _noInternetAnalyzers = [];
+
+  static void initialize(
+          List<NoInternetAnalyzerFunction> noInternetAnalyzers) =>
+      _noInternetAnalyzers = noInternetAnalyzers;
 
   // ignore: avoid_annotating_with_dynamic
   static void showError(dynamic e) {
@@ -34,6 +44,17 @@ class ToastService {
     //debugPrint(e);
   }
 
+  static bool _isNoInternetException(Exception e) {
+    for (final NoInternetAnalyzerFunction noInternetAnalyzer
+        in _noInternetAnalyzers) {
+      final bool isNoInternet = noInternetAnalyzer(e);
+      if (isNoInternet) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static void _showException(Exception e) {
     String msg;
     if (e is ServerStatusException) {
@@ -42,7 +63,9 @@ $serverInternalError ${e.status}: ${e.reasonPhrase ?? ''}.
         $serverInternalErrorTryAgain.
         ''';
     } else {
-      if ((e is TimeoutException) || (e is SocketException)) {
+      if ((e is TimeoutException) ||
+          (e is SocketException) ||
+          (_isNoInternetException(e))) {
         msg = noInternetError;
       } else {
         msg = '$internalError: $e';
