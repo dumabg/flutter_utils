@@ -1,3 +1,6 @@
+## 4.6.0
+- ToastService no internet analyzers.
+  
 ## 3.1.3
 
 - Upgrade to Dart 3
