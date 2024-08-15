@@ -1,11 +1,11 @@
 name: flutter_utils
 description: Flutter utils by Miguel Angel Besalduch Garcia
-version: 4.6.0
+version: 5.0.0
 homepage:
 publish_to: none
 
 environment:
-  sdk: ">=3.4.1 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
 
 dependencies:
   flutter:
