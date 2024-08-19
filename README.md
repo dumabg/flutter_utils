@@ -8,6 +8,9 @@ Extensions, mocking, util, widgets
 Require dart_utils library
 
 # Versions
+## 5.1.0
+- Upgrade dart_utils dependence.
+  
 ## 5.0.0
 - Upgrade to sdk 3.5.0. Flutter 3.24.0.
 

@@ -46,10 +46,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "12c8e055b5af0f09917cd01d1cb7fa06936df626"
+      resolved-ref: "223e83a72c47a275bc73819a6d45426143065a28"
       url: "https://github.com/dumabg/dart_utils.git"
     source: git
-    version: "2.0.0+2"
+    version: "2.1.0"
   fake_async:
     dependency: transitive
     description:
