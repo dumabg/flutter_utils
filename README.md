@@ -8,6 +8,9 @@ Extensions, mocking, util, widgets
 Require dart_utils library
 
 # Versions
+## 5.2.0
+- Upgrade dart_utils dependence.
+
 ## 5.1.0
 - Upgrade dart_utils dependence.
   
